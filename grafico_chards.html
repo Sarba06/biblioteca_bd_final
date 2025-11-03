@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>📊 Panel de Libros - Biblioteca AWS EC2</title>
+
+    <!-- Google Charts -->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <style>
+      body {
+        font-family: "Poppins", "Segoe UI", sans-serif;
+        background: linear-gradient(120deg, #f6f9fc, #e9f0ff);
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+
+      header {
+        background: #1a73e8;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        margin: 0;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+
+      main {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 20px;
+      }
+
+      #chart_div {
+        width: 100%;
+        height: 500px;
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 40px;
+        transition: transform 0.2s ease;
+      }
+
+      #chart_div:hover {
+        transform: scale(1.01);
+      }
+
+      #table_div {
+        width: 100%;
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      footer {
+        text-align: center;
+        color: #555;
+        margin-top: 50px;
+        padding-bottom: 20px;
+      }
+
+      .loader {
+        text-align: center;
+        margin-top: 50px;
+        color: #1a73e8;
+        font-weight: 500;
+      }
+    </style>
+
+    <script>
+      google.charts.load("current", { packages: ["corechart", "table"] });
+      google.charts.setOnLoadCallback(drawDashboard);
+
+      function drawDashboard() {
+        document.getElementById("chart_div").innerHTML =
+          '<div class="loader">Cargando datos desde AWS EC2...</div>';
+
+        fetch("http://localhost:5000/datos")
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+
+            var dataTable = google.visualization.arrayToDataTable(data);
+
+            // -------- GRAFICO MEJORADO (BURBUJAS) --------
+            var optionsChart = {
+  title: "Cantidad de páginas por libro",
+  backgroundColor: "#ffffff",
+  chartArea: { width: "85%", height: "70%" },
+  legend: { position: "none" },
+  colors: ["#1a73e8"],
+  bar: { groupWidth: "80%" },
+  hAxis: { textStyle: { fontSize: 10, slantedText: true } },
+  vAxis: { title: "Páginas", gridlines: { color: "#e0e0e0" } }
+};
+
+
+            var chart = new google.visualization.ColumnChart(
+            document.getElementById("chart_div")
+             );
+
+            chart.draw(dataTable, optionsChart);
+
+            // -------- TABLA --------
+            var table = new google.visualization.Table(
+              document.getElementById("table_div")
+            );
+            var tableOptions = {
+              showRowNumber: true,
+              width: "100%",
+              height: "auto",
+              allowHtml: true,
+              alternatingRowStyle: true,
+            };
+            table.draw(dataTable, tableOptions);
+          })
+          .catch((err) => {
+            console.error("Error obteniendo datos:", err);
+            document.getElementById("chart_div").innerHTML =
+              "<p style='color:red;text-align:center;'>Error al conectar con el servidor Flask</p>";
+          });
+      }
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <h1>📚 Biblioteca en AWS EC2 - Panel de Libros</h1>
+    </header>
+
+    <main>
+      <div id="chart_div"></div>
+      <div id="table_div"></div>
+    </main>
+
+    <footer>Desarrollado localmente desde tu PC 🚀</footer>
+  </body>
+</html>
