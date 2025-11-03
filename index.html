@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca Central</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <!-- ===== Barra Superior ===== -->
+<header class="navbar">
+  <div class="logo">📚 Biblioteca Central</div>
+  <nav>
+    <div class="select-container">
+      <select class="blackboard-select">
+        <option disabled selected>Selecciona un Dashboard</option>
+        <option value="1">Google Chards</option>
+        <option value="2">D4JS</option>
+      </select>
+    </div>
+    <button class="soporte-btn">Soporte</button>
+  </nav>
+</header>
+
+  <!-- ===== Carrusel de Imágenes ===== -->
+  <section class="slider">
+  <div class="slider-track">
+    <div class="slide"><img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f" alt="Biblioteca 1"></div>
+    <div class="slide"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac" alt="Biblioteca 2"></div>
+    <div class="slide"><img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66" alt="Biblioteca 3"></div>
+    <!-- Repetimos las mismas para un bucle continuo -->
+    <div class="slide"><img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f" alt="Biblioteca 1"></div>
+    <div class="slide"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac" alt="Biblioteca 2"></div>
+    <div class="slide"><img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66" alt="Biblioteca 3"></div>
+  </div>
+  </section>
+
+  <!-- ===== Sección de Información ===== -->
+  <main class="info-section">
+    <section class="info-card">
+      <h2>Descripción</h2>
+      <p>
+        La Biblioteca Central ofrece un espacio de conocimiento y cultura, con acceso a miles de libros físicos y digitales. 
+        Nuestro compromiso es fomentar el aprendizaje continuo y el amor por la lectura en todos nuestros visitantes.
+      </p>
+    </section>
+
+    <section class="info-card">
+      <h2>Misión</h2>
+      <p>
+        Proporcionar recursos informativos, educativos y tecnológicos de alta calidad, 
+        promoviendo la investigación, el desarrollo académico y la inclusión cultural de nuestra comunidad.
+      </p>
+    </section>
+
+    <section class="info-card">
+      <h2>Visión</h2>
+      <p>
+        Ser una biblioteca líder en innovación y acceso al conocimiento, inspirando a generaciones 
+        a través de la lectura, la creatividad y la tecnología educativa.
+      </p>
+    </section>
+  </main>
+
+  <!-- ===== Pie de página ===== -->
+  <footer>
+    <p>© 2025 Biblioteca Central | Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+ // Carrusel con transiciones suaves sin parpadeo
+  let slides = document.querySelectorAll(".slide");
+  let current = 0;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === index);
+    });
+  }
+
+  function nextSlide() {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }
+
+  // Cambia cada 5 segundos
+  setInterval(nextSlide, 5000);
+  </script>
+</body>
+</html>
