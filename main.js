@@ -1098,3 +1098,92 @@ if (!window.IntersectionObserver) {
 if (!('scrollBehavior' in document.documentElement.style)) {
     console.warn('Scroll behavior no soportado, consider adding polyfill');
 }
+// Chat Flotante
+function initChatWidget() {
+    const chatBubble = document.getElementById('chatBubble');
+    const chatWindow = document.getElementById('chatWindow');
+    const closeChat = document.getElementById('closeChat');
+    const chatForm = document.getElementById('chatForm');
+    const chatSuccess = document.getElementById('chatSuccess');
+    
+    // Abrir chat
+    chatBubble.addEventListener('click', function(e) {
+        e.stopPropagation();
+        chatWindow.classList.add('active');
+    });
+    
+    // Cerrar chat
+    closeChat.addEventListener('click', function(e) {
+        e.stopPropagation();
+        closeChatWindow();
+    });
+    
+    // Cerrar al hacer click fuera
+    document.addEventListener('click', function(e) {
+        if (!chatWindow.contains(e.target) && !chatBubble.contains(e.target)) {
+            closeChatWindow();
+        }
+    });
+    
+    // Enviar formulario
+    chatForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validación
+        const formData = new FormData(chatForm);
+        let isValid = true;
+        
+        const requiredFields = chatForm.querySelectorAll('[required]');
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                isValid = false;
+                field.style.borderColor = '#e74c3c';
+            } else {
+                field.style.borderColor = '#e8e8e8';
+            }
+        });
+        
+        if (isValid) {
+            // Mostrar éxito
+            chatSuccess.classList.add('active');
+            
+            // Ocultar después de 3 segundos y resetear
+            setTimeout(() => {
+                chatSuccess.classList.remove('active');
+                chatForm.reset();
+                closeChatWindow();
+            }, 3000);
+            
+            // Aquí puedes enviar el formulario
+            // enviarFormularioChat(formData);
+        }
+    });
+    
+    function closeChatWindow() {
+        chatWindow.classList.remove('active');
+    }
+    
+    // Efectos de entrada en los campos
+    const chatInputs = chatForm.querySelectorAll('input, textarea, select');
+    chatInputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.style.transform = 'scale(1.02)';
+        });
+        
+        input.addEventListener('blur', function() {
+            this.style.transform = 'scale(1)';
+        });
+        
+        // Limpiar error al escribir
+        input.addEventListener('input', function() {
+            if (this.value.trim()) {
+                this.style.borderColor = '#e8e8e8';
+            }
+        });
+    });
+}
+
+// Inicializar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', function() {
+    initChatWidget();
+});
