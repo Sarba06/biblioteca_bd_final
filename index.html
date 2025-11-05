@@ -20,8 +20,13 @@
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-content">
             <div class="loading-logo">
-                <span class="logo-icon">📚</span>
-                <span class="logo-text">Biblioteca<span class="logo-highlight">Central</span></span>
+                <img src="Mr.Book.png" alt="MR.BOOK Biblioteca" class="logo-icon"></span>
+                            <a href="#inicio" class="logo">
+                <div class="logo-text">
+                    <span>MR.BOOK</span>
+                    <span class="logo-highlight">Biblioteca Central</span>
+                </div>
+            </a>
             </div>
             <div class="loading-progress">
                 <div class="progress-bar"></div>
@@ -87,8 +92,8 @@
         <nav class="navbar">
             <div class="nav-container">
                 <a href="#inicio" class="logo">
-                    <span class="logo-icon">📚</span>
-                    <span class="logo-text">Biblioteca<span class="logo-highlight">Central</span></span>
+                    <img src="Mr.Book.png" alt="MR.BOOK Biblioteca" class="logo-imagen"></span>
+                    <span class="logo-text">MR.<span class="logo-highlight">BOOK</span></span>
                 </a>
                 
                 <ul class="nav-menu">
@@ -164,7 +169,7 @@
             <div class="scroll-arrow"></div>
         </div>
     </section>
-
+    
     <!-- Misión y Visión -->
     <section id="nosotros" class="mission-vision">
         <div class="container">
@@ -272,7 +277,7 @@
                     <ul class="service-features">
                         <li>6 materiales máximo (3 libros + 3 tesis)</li>
                         <li>Préstamo por tiempo establecido</li>
-                        <li>Plataforma digital de renovaciones</li>
+                        <li>Plataforma digital</li>
                         <li>Sistema automatizado de gestión</li>
                         <li>Visualización de disponibilidad en tiempo real</li>
                     </ul>
@@ -587,14 +592,73 @@
         </div>
     </div>
 </section>
-
+<!-- Chat Flotante -->
+<div class="chat-container">
+    <!-- Botón del chat -->
+    <div class="chat-bubble" id="chatBubble">
+        <div class="chat-icon">💬</div>
+        <div class="chat-pulse"></div>
+    </div>
+    
+    <!-- Ventana del chat -->
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <h3>😊 Contáctanos</h3>
+            <p>Lunes a Viernes • 8:00 - 17:00</p>
+            <button class="close-chat" id="closeChat">×</button>
+        </div>
+        
+        <form id="chatForm" class="chat-form">
+            <div class="form-group">
+                <input type="text" id="chatName" name="name" required>
+                <label for="chatName">Nombre Completo</label>
+            </div>
+            
+            <div class="form-group">
+                <input type="email" id="chatEmail" name="email" required>
+                <label for="chatEmail">Correo Electrónico</label>
+            </div>
+            
+            <div class="form-group">
+                <input type="text" id="chatSubject" name="subject" required>
+                <label for="chatSubject">Asunto</label>
+            </div>
+            
+            <div class="form-group">
+                <select id="chatReason" name="reason" required>
+                    <option value="" disabled selected>Selecciona motivo</option>
+                    <option value="consulta">Consulta General</option>
+                    <option value="prestamo">Préstamo de Material</option>
+                    <option value="renovacion">Renovación</option>
+                    <option value="sugerencia">Sugerencia</option>
+                    <option value="queja">Queja o Reclamo</option>
+                    <option value="otros">Otros</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <textarea id="chatMessage" name="message" placeholder="Escribe tu mensaje..." required></textarea>
+            </div>
+            
+            <button type="submit" class="chat-submit-btn">
+                <span>Enviar Mensaje</span>
+                <span class="send-icon">✈️</span>
+            </button>
+        </form>
+        
+        <div class="chat-success" id="chatSuccess">
+            <div class="success-check">✅</div>
+            <p>¡Mensaje enviado! Te contactaremos pronto.</p>
+        </div>
+    </div>
+</div>
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <div class="footer-logo">
-                        <span class="logo-icon">📚</span>
+                        <img src="Mr.Book.png" alt="MR.BOOK Biblioteca" class="logo-imagen"></span>
                         <span>Biblioteca<span class="logo-highlight">Central</span></span>
                     </div>
                     <p class="footer-description">
