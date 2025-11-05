@@ -1,90 +1,650 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Biblioteca Central</title>
-  <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Biblioteca Central - Serviendo a la comunidad desde 1965. Más de 50,000 libros disponibles.">
+    <title>Biblioteca Central | Servicios Bibliotecológicos desde 1965</title>
+    
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/animaciones.css">
 </head>
 <body>
-  <!-- ===== Barra Superior ===== -->
-<header class="navbar">
-  <div class="logo">📚 Biblioteca Central</div>
-  <nav>
-    <div class="select-container">
-      <select class="blackboard-select">
-        <option disabled selected>Selecciona un Dashboard</option>
-        <option value="1">Google Chards</option>
-        <option value="2">D4JS</option>
-      </select>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">Biblioteca<span class="logo-highlight">Central</span></span>
+            </div>
+            <div class="loading-progress">
+                <div class="progress-bar"></div>
+            </div>
+            <p class="loading-text">Cargando conocimiento...</p>
+        </div>
     </div>
-    <button class="soporte-btn">Soporte</button>
-  </nav>
-</header>
 
-  <!-- ===== Carrusel de Imágenes ===== -->
-  <section class="slider">
-  <div class="slider-track">
-    <div class="slide"><img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f" alt="Biblioteca 1"></div>
-    <div class="slide"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac" alt="Biblioteca 2"></div>
-    <div class="slide"><img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66" alt="Biblioteca 3"></div>
-    <!-- Repetimos las mismas para un bucle continuo -->
-    <div class="slide"><img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f" alt="Biblioteca 1"></div>
-    <div class="slide"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac" alt="Biblioteca 2"></div>
-    <div class="slide"><img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66" alt="Biblioteca 3"></div>
-  </div>
-  </section>
+    <!-- Botón Volver Arriba -->
+    <button class="back-to-top" id="backToTop">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
 
-  <!-- ===== Sección de Información ===== -->
-  <main class="info-section">
-    <section class="info-card">
-      <h2>Descripción</h2>
-      <p>
-        La Biblioteca Central ofrece un espacio de conocimiento y cultura, con acceso a miles de libros físicos y digitales. 
-        Nuestro compromiso es fomentar el aprendizaje continuo y el amor por la lectura en todos nuestros visitantes.
-      </p>
+    <!-- Menú desplegable -->
+    <div class="dropdown-menu">
+        <button class="dropdown-toggle" id="dropdownToggle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+        <div class="dropdown-content" id="dropdownContent">
+            <div class="dropdown-section">
+                <a href="#inicio" class="dropdown-item">🏠 Inicio</a>
+            </div>
+            
+            <div class="dropdown-section">
+                <div class="dropdown-header">📖 Nosotros</div>
+                <a href="#mision" class="dropdown-subitem">🎯 Misión</a>
+                <a href="#vision" class="dropdown-subitem">🔮 Visión</a>
+                <a href="#valores" class="dropdown-subitem">🌟 Valores</a>
+            </div>
+            
+            <div class="dropdown-section">
+                <div class="dropdown-header">🔧 Servicios</div>
+                <a href="#prestamo-interno" class="dropdown-subitem">📚 Préstamo Interno</a>
+                <a href="#prestamo-externo" class="dropdown-subitem">🏠 Préstamo Externo</a>
+            </div>
+            
+            <div class="dropdown-section">
+                <a href="#catalogo" class="dropdown-item">📚 Catálogo</a>
+                <a href="#horarios" class="dropdown-item">🕒 Horarios</a>
+            </div>
+
+            <div class="dropdown-section">
+                <div class="dropdown-header">📊 Estadísticas</div>
+                <a href="#google-charts" class="dropdown-subitem" onclick="scrollToPlatform('google-charts')">📈 Google Charts</a>
+                <a href="#d3js" class="dropdown-subitem" onclick="scrollToPlatform('d3js')">🎨 D3.js</a>
+                <a href="#powerbi" class="dropdown-subitem" onclick="scrollToPlatform('powerbi')">💼 Power BI</a>
+            </div>
+            
+            <div class="dropdown-section">
+                <a href="#contacto" class="dropdown-item">📞 Contacto</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header y Navegación -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="#inicio" class="logo">
+                    <span class="logo-icon">📚</span>
+                    <span class="logo-text">Biblioteca<span class="logo-highlight">Central</span></span>
+                </a>
+                
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="#inicio" class="nav-link active">Inicio</a></li>
+                    <li class="nav-item"><a href="#nosotros" class="nav-link">Nosotros</a></li>
+                    <li class="nav-item"><a href="#servicios" class="nav-link">Servicios</a></li>
+                    <li class="nav-item"><a href="#catalogo" class="nav-link">Catálogo</a></li>
+                    <li class="nav-item"><a href="#horarios" class="nav-link">Horarios</a></li>
+                    <li class="nav-item"><a href="#dashboards" class="nav-link">Estadísticas</a></li>
+                    <li class="nav-item"><a href="#contacto" class="nav-link btn-contact">Contacto</a></li>
+                </ul>
+
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-background">
+            <div class="floating-books">
+                <div class="book book-1">📕</div>
+                <div class="book book-2">📗</div>
+                <div class="book book-3">📘</div>
+                <div class="book book-4">📙</div>
+                <div class="book book-5">📒</div>
+            </div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-badge animate-pulse-slow">🏛️ Serviendo desde 1965</div>
+            <h1 class="hero-title">
+                Conocimiento <span class="text-gradient">Abierto</span><br>
+                <span class="text-gradient">Para Todos</span>
+            </h1>
+            <p class="hero-description fade-in-delay">
+                Más de <strong>1,000 ejemplares</strong> a tu disposición. Servicios bibliotecológicos 
+                profesionales en un espacio diseñado para el aprendizaje y la investigación.
+            </p>
+            <div class="hero-actions fade-in-delay-2">
+                <a href="#catalogo" class="btn btn-primary btn-icon-animate">
+                    <span>Explorar Catálogo</span>
+                    <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </a>
+                <a href="#horarios" class="btn btn-secondary">Ver Horarios</a>
+            </div>
+            
+            <!-- Stats -->
+            <div class="hero-stats fade-in-delay-3">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="58">0</div>
+                    <div class="stat-label">Años de Servicio</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="1000">0</div>
+                    <div class="stat-label">Ejemplares</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="98">0</div>
+                    <div class="stat-label">Satisfacción</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
     </section>
 
-    <section class="info-card">
-      <h2>Misión</h2>
-      <p>
-        Proporcionar recursos informativos, educativos y tecnológicos de alta calidad, 
-        promoviendo la investigación, el desarrollo académico y la inclusión cultural de nuestra comunidad.
-      </p>
+    <!-- Misión y Visión -->
+    <section id="nosotros" class="mission-vision">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title scroll-animate">Nuestra Biblioteca</h2>
+                <p class="section-subtitle scroll-animate delay-1">58 años de excelencia en servicios bibliotecológicos</p>
+            </div>
+
+            <div class="mv-grid">
+                <div id="mision" class="mv-card mission scroll-animate delay-2">
+                    <div class="mv-card-inner">
+                        <div class="mv-icon">🎯</div>
+                        <h2>Nuestra Misión</h2>
+                        <p>
+                            Facilitar el acceso universal al conocimiento mediante servicios bibliotecológicos 
+                            de excelencia, promoviendo la investigación, el aprendizaje continuo y el desarrollo 
+                            cultural de nuestra comunidad.
+                        </p>
+                        <ul class="mv-features">
+                            <li>✅ Gestión eficiente de colecciones bibliográficas</li>
+                            <li>✅ Servicios de información especializados</li>
+                            <li>✅ Formación de usuarios competentes</li>
+                            <li>✅ Preservación del patrimonio documental</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="vision" class="mv-card vision scroll-animate delay-3">
+                    <div class="mv-card-inner">
+                        <div class="mv-icon">🔮</div>
+                        <h2>Nuestra Visión</h2>
+                        <p>
+                            Consolidarnos como el centro de recursos para el aprendizaje y la investigación 
+                            de referencia, reconocido por la calidad de sus servicios, la innovación tecnológica 
+                            y su contribución al desarrollo académico y cultural.
+                        </p>
+                        <ul class="mv-features">
+                            <li>🚀 Liderazgo en innovación bibliotecológica</li>
+                            <li>🚀 Excelencia en servicios al usuario</li>
+                            <li>🚀 Centro de referencia investigativa</li>
+                            <li>🚀 Sostenibilidad y crecimiento continuo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Valores -->
+            <div id="valores" class="values-section">
+                <h3 class="scroll-animate">Nuestros Valores Institucionales</h3>
+                <div class="values-grid">
+                    <div class="value-card scroll-animate delay-1">
+                        <div class="value-icon">🤝</div>
+                        <h4>Servicio al Usuario</h4>
+                        <p>Orientación profesional y atención personalizada a cada usuario.</p>
+                    </div>
+                    <div class="value-card scroll-animate delay-2">
+                        <div class="value-icon">💡</div>
+                        <h4>Innovación Continua</h4>
+                        <p>Adaptación permanente a las nuevas tecnologías de información.</p>
+                    </div>
+                    <div class="value-card scroll-animate delay-3">
+                        <div class="value-icon">🌟</div>
+                        <h4>Excelencia</h4>
+                        <p>Calidad en todos los procesos y servicios bibliotecológicos.</p>
+                    </div>
+                    <div class="value-card scroll-animate delay-4">
+                        <div class="value-icon">🌱</div>
+                        <h4>Sostenibilidad</h4>
+                        <p>Gestión responsable de recursos bibliográficos y tecnológicos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="info-card">
-      <h2>Visión</h2>
-      <p>
-        Ser una biblioteca líder en innovación y acceso al conocimiento, inspirando a generaciones 
-        a través de la lectura, la creatividad y la tecnología educativa.
-      </p>
+    <!-- Servicios -->
+    <section id="servicios" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title scroll-animate">Servicios Bibliotecológicos</h2>
+                <p class="section-subtitle scroll-animate delay-1">Departamento de Circulación y Préstamo - Servicios especializados</p>
+            </div>
+
+            <div class="services-grid">
+                <div id="prestamo-interno" class="service-card scroll-animate delay-2">
+                    <div class="service-icon">📚</div>
+                    <h3>Préstamo Interno</h3>
+                    <p>Consulta de material bibliográfico dentro de las instalaciones de la biblioteca con asistencia profesional.</p>
+                    <ul class="service-features">
+                        <li>Acceso directo a depósitos y secciones</li>
+                        <li>Asesoría en búsqueda especializada</li>
+                        <li>Consulta en salas de lectura</li>
+                        <li>Uso de catálogo electrónico</li>
+                        <li>Orientación bibliográfica personalizada</li>
+                    </ul>
+                    <div class="service-note">
+                        <strong>Procedimiento:</strong> Entrega de pertenencias, ficha de control, consulta en anaqueles
+                    </div>
+                </div>
+
+                <div id="prestamo-externo" class="service-card scroll-animate delay-3">
+                    <div class="service-icon">🏠</div>
+                    <h3>Préstamo Externo</h3>
+                    <p>Lleva el material bibliográfico a domicilio para consulta externa con renovaciones disponibles.</p>
+                    <ul class="service-features">
+                        <li>6 materiales máximo (3 libros + 3 tesis)</li>
+                        <li>Préstamo por tiempo establecido</li>
+                        <li>Plataforma digital de renovaciones</li>
+                        <li>Sistema automatizado de gestión</li>
+                        <li>Visualización de disponibilidad en tiempo real</li>
+                    </ul>
+                    <div class="service-note">
+                        <strong>Requisito:</strong> Identificación personal vigente para el préstamo
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-  </main>
 
-  <!-- ===== Pie de página ===== -->
-  <footer>
-    <p>© 2025 Biblioteca Central | Todos los derechos reservados.</p>
-  </footer>
+    <!-- Catálogo -->
+    <section id="catalogo" class="catalog">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title scroll-animate">Material Bibliográfico Destacado</h2>
+                <p class="section-subtitle scroll-animate delay-1">Consulta nuestro catálogo con más de 1,000 ejemplares disponibles</p>
+            </div>
 
-  <script>
- // Carrusel con transiciones suaves sin parpadeo
-  let slides = document.querySelectorAll(".slide");
-  let current = 0;
+            <div class="catalog-grid">
+                <div class="book-card scroll-animate delay-2">
+                    <div class="book-image">
+                        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=250&fit=crop" alt="Cien años de soledad" loading="lazy">
+                        <div class="book-badge">Más Consultado</div>
+                    </div>
+                    <div class="book-info">
+                        <h3>Cien Años de Soledad</h3>
+                        <p class="book-author">Gabriel García Márquez</p>
+                        <p class="book-description">Obra cumbre del realismo mágico latinoamericano, disponible para préstamo interno y externo.</p>
+                        <div class="book-meta">
+                            <span class="meta-item">📚 Literatura Hispanoamericana</span>
+                            <span class="meta-item">📍 Disponible para Préstamo</span>
+                        </div>
+                    </div>
+                </div>
 
-  function showSlide(index) {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle("active", i === index);
-    });
-  }
+                <div class="book-card scroll-animate delay-3">
+                    <div class="book-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=250&fit=crop" alt="El Quijote" loading="lazy">
+                        <div class="book-badge">Clásico Universal</div>
+                    </div>
+                    <div class="book-info">
+                        <h3>Don Quijote de la Mancha</h3>
+                        <p class="book-author">Miguel de Cervantes Saavedra</p>
+                        <p class="book-description">Edición especial comentada, disponible para consulta en sala de lectura.</p>
+                        <div class="book-meta">
+                            <span class="meta-item">📚 Literatura Clásica Española</span>
+                            <span class="meta-item">📍 Préstamo Interno</span>
+                        </div>
+                    </div>
+                </div>
 
-  function nextSlide() {
-    current = (current + 1) % slides.length;
-    showSlide(current);
-  }
+                <div class="book-card scroll-animate delay-4">
+                    <div class="book-image">
+                        <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=250&fit=crop" alt="Rayuela" loading="lazy">
+                        <div class="book-badge">Vanguardia Literaria</div>
+                    </div>
+                    <div class="book-info">
+                        <h3>Rayuela</h3>
+                        <p class="book-author">Julio Cortázar</p>
+                        <p class="book-description">Obra innovadora que revolucionó la narrativa contemporánea, múltiples ejemplares disponibles.</p>
+                        <div class="book-meta">
+                            <span class="meta-item">📚 Literatura Contemporánea</span>
+                            <span class="meta-item">📍 Disponible para Préstamo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  // Cambia cada 5 segundos
-  setInterval(nextSlide, 5000);
-  </script>
+            <div class="catalog-actions scroll-animate delay-5">
+                <a href="#" class="btn btn-primary">Catálogo Completo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Horarios y Ubicación -->
+    <section id="horarios" class="mission-vision">
+        <div class="container">
+            <div class="mv-grid">
+                <div class="mv-card mission scroll-animate delay-1">
+                    <div class="mv-card-inner">
+                        <div class="mv-icon">🕒</div>
+                        <h2>Horarios de Atención</h2>
+                        <p>
+                            La Biblioteca Central ofrece sus servicios a la comunidad universitaria 
+                            y público en general en los siguientes horarios:
+                        </p>
+                        <ul class="mv-features">
+                            <li>📅 <strong>Lunes a Viernes:</strong></li>
+                            <li>⏰ Área de Lectura y Espera: 6:30 hrs</li>
+                            <li>📚 Servicios Bibliotecológicos: 7:30 - 20:00 hrs</li>
+                            <li> </li>
+                            <li>📅 <strong>Sábados y Domingos:</strong></li>
+                            <li>⏰ Área de Lectura y Espera: 7:00 hrs</li>
+                            <li>📚 Servicios Bibliotecológicos: 8:00 - 18:00 hrs</li>
+                        </ul>
+                        <div class="special-hours">
+                            <h4>Información Importante</h4>
+                            <p>🎫 <strong>Acceso gratuito</strong> para toda la comunidad</p>
+                            <p>📋 <strong>Procedimientos establecidos</strong> para cada servicio</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mv-card vision scroll-animate delay-2">
+                    <div class="mv-card-inner">
+                        <div class="mv-icon">📍</div>
+                        <h2>Ubicación y Contacto</h2>
+                        <p>
+                            Visítanos en nuestras instalaciones especialmente diseñadas 
+                            para el servicio bibliotecológico:
+                        </p>
+                        <ul class="mv-features">
+                            <li>🏛️ <strong>Departamento:</strong> Circulación y Préstamo</li>
+                            <li>📞 <strong>Teléfono Central:</strong> (502) 2410-8000</li>
+                            <li>📧 <strong>Correo:</strong> circulacion@bibliotecacentral.edu.gt</li>
+                            <li>🌐 <strong>Sistema:</strong> Catálogo Electrónico Integrado</li>
+                        </ul>
+                        <div class="facilities">
+                            <h4>Servicios Adicionales</h4>
+                            <p>🔍 <strong>Búsqueda especializada</strong> en depósitos</p>
+                            <p>💻 <strong>Consulta digital</strong> de materiales</p>
+                            <p>📊 <strong>Estadísticas</strong> de uso y consulta</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboards -->
+    <section id="dashboards" class="dashboards">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title scroll-animate">Sistema de Estadísticas</h2>
+                <p class="section-subtitle scroll-animate delay-1">Monitoreo y análisis de servicios bibliotecológicos en tiempo real</p>
+            </div>
+
+            <div class="dashboard-platforms">
+                <!-- Google Charts -->
+                <div id="google-charts-platform" class="platform-card scroll-animate delay-2">
+                    <div class="platform-header" data-platform="google-charts">
+                        <div class="platform-icon">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="#4285F4">
+                                <path d="M5 5h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            </svg>
+                        </div>
+                        <h3>Google Charts</h3>
+                        <span class="platform-arrow">▼</span>
+                    </div>
+                    <div class="platform-content" id="google-charts">
+                        <div class="dashboard-mini-grid">
+                            <a href="dashboards/prestamos-categoria.html" class="mini-dashboard-card">
+                                <h4>📊 Préstamos por Categoría</h4>
+                                <p>Distribución de préstamos por género literario y material disponible en la biblioteca</p>
+                                <span class="dashboard-link">Ver Dashboard →</span>
+                            </a>
+                            <a href="dashboards/popularidad-autores.html" class="mini-dashboard-card">
+                                <h4>👑 Popularidad de Autores</h4>
+                                <p>Ranking de autores más solicitados y consultados por nuestros usuarios</p>
+                                <span class="dashboard-link">Ver Dashboard →</span>
+                            </a>
+                            <a href="dashboards/inventario-disponibilidad.html" class="mini-dashboard-card">
+                                <h4>📚 Inventario y Disponibilidad</h4>
+                                <p>Estado actual del material bibliográfico y tasas de disponibilidad</p>
+                                <span class="dashboard-link">Ver Dashboard →</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- D3.js -->
+                <div id="d3js-platform" class="platform-card scroll-animate delay-3">
+                    <div class="platform-header" data-platform="d3js">
+                        <div class="platform-icon">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="#F58442">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3>D3.js</h3>
+                        <span class="platform-arrow">▼</span>
+                    </div>
+                    <div class="platform-content" id="d3js">
+                        <div class="dashboard-mini-grid">
+                            <a href="dashboards/flujo-visitantes.html" class="mini-dashboard-card">
+                                <h4>👥 Flujo de Visitantes</h4>
+                                <p>Mapa de calor interactivo de patrones de consulta por horarios y días</p>
+                                <span class="dashboard-link">Ver Dashboard →</span>
+                            </a>
+                            <a href="dashboards/demografia-usuarios.html" class="mini-dashboard-card">
+                                <h4>📈 Demografía de Usuarios</h4>
+                                <p>Análisis demográfico detallado de nuestros consultantes y sus preferencias</p>
+                                <span class="dashboard-link">Ver Dashboard →</span>
+                            </a>
+                            <a href="dashboards/tendencias-lectura.html" class="mini-dashboard-card">
+                                <h4>📖 Tendencias de Lectura</h4>
+                                <p>Evolución temporal de preferencias de material consultado y temas populares</p>
+                                <span class="dashboard-link">Ver Dashboard →</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Power BI -->
+                <div id="powerbi-platform" class="platform-card scroll-animate delay-4">
+                    <div class="platform-header" data-platform="powerbi">
+                        <div class="platform-icon">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="#F2C811">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3>Power BI</h3>
+                        <span class="platform-arrow">▼</span>
+                    </div>
+                    <div class="platform-content" id="powerbi">
+                        <div class="dashboard-mini-grid">
+                            <a href="dashboards/powerbi-reporte1.html" class="mini-dashboard-card">
+                                <h4>📋 Reporte Ejecutivo</h4>
+                                <p>Métricas generales y KPIs de servicios bibliotecológicos para la administración</p>
+                                <span class="dashboard-link">Ver Reporte →</span>
+                            </a>
+                            <a href="dashboards/powerbi-reporte2.html" class="mini-dashboard-card">
+                                <h4>⚙️ Análisis de Gestión</h4>
+                                <p>Indicadores de eficiencia operativa en circulación y procesos internos</p>
+                                <span class="dashboard-link">Ver Reporte →</span>
+                            </a>
+                            <a href="dashboards/powerbi-reporte3.html" class="mini-dashboard-card">
+                                <h4>🎯 Proyecciones y KPIs</h4>
+                                <p>Indicadores clave de desempeño bibliotecario y proyecciones futuras</p>
+                                <span class="dashboard-link">Ver Reporte →</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Contacto -->
+<section id="contacto" class="contact">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title scroll-animate">Información de Contacto</h2>
+            <p class="section-subtitle scroll-animate delay-1">Departamento de Circulación y Préstamo - Atención al usuario</p>
+        </div>
+
+        <div class="contact-simple">
+            <!-- Columna izquierda - Información de contacto -->
+            <div class="contact-info-simple">
+                <div class="contact-method-simple scroll-animate delay-2">
+                    <div class="method-icon-simple">📞</div>
+                    <div class="method-info-simple">
+                        <h4>Teléfonos de Contacto</h4>
+                        <p><strong>Central Bibliotecológica:</strong> (502) 2410-8000</p>
+                        <p><strong>Circulación y Préstamo:</strong> (502) 2410-8001</p>
+                        <p><strong>Consulta Especializada:</strong> (502) 2410-8002</p>
+                    </div>
+                </div>
+
+                <div class="contact-method-simple scroll-animate delay-3">
+                    <div class="method-icon-simple">📧</div>
+                    <div class="method-info-simple">
+                        <h4>Correos Electrónicos</h4>
+                        <p><strong>Información General:</strong> info@bibliotecacentral.edu.gt</p>
+                        <p><strong>Circulación:</strong> circulacion@bibliotecacentral.edu.gt</p>
+                        <p><strong>Administración:</strong> admin@bibliotecacentral.edu.gt</p>
+                    </div>
+                </div>
+
+                <div class="contact-method-simple scroll-animate delay-4">
+                    <div class="method-icon-simple">📍</div>
+                    <div class="method-info-simple">
+                        <h4>Ubicación Física</h4>
+                        <p><strong>Dirección:</strong> Edificio Central de Biblioteca</p>
+                        <p><strong>Departamento:</strong> Circulación y Préstamo - Nivel 1</p>
+                        <p><strong>Horario:</strong> Lunes a Domingo según horarios establecidos</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna derecha - Procedimientos -->
+            <div class="contact-procedures">
+                <div class="contact-method-simple scroll-animate delay-5">
+                    <div class="method-icon-simple">🗺️</div>
+                    <div class="method-info-simple">
+                        <h4>Procedimientos Establecidos</h4>
+                        <p class="procedures-subtitle">Flujos de trabajo del Departamento de Circulación y Préstamo</p>
+                        
+                        <div class="procedures-grid">
+                            <div class="procedure-item">
+                                <h5>Préstamo Interno</h5>
+                                <ul>
+                                    <li>✅ Entrega de pertenencias con ficha de control</li>
+                                    <li>✅ Consulta en catálogo electrónico</li>
+                                    <li>✅ Acceso guiado a depósitos</li>
+                                    <li>✅ Registro estadístico de consultas</li>
+                                </ul>
+                            </div>
+                            <div class="procedure-item">
+                                <h5>Préstamo Externo</h5>
+                                <ul>
+                                    <li>✅ Identificación personal requerida</li>
+                                    <li>✅ 6 materiales máximo (3 libros + 3 tesis)</li>
+                                    <li>✅ Sistema automatizado de gestión</li>
+                                    <li>✅ Renovaciones según disponibilidad</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-icon">📚</span>
+                        <span>Biblioteca<span class="logo-highlight">Central</span></span>
+                    </div>
+                    <p class="footer-description">
+                        Servicios bibliotecológicos de excelencia desde 1965. 
+                        Departamento de Circulación y Préstamo - Atención profesional especializada.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="Catálogo">📋</a>
+                        <a href="#" class="social-link" title="Consultas">🔍</a>
+                        <a href="#" class="social-link" title="Digital">💻</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Servicios</h4>
+                    <ul class="footer-links">
+                        <li><a href="#prestamo-interno">Préstamo Interno</a></li>
+                        <li><a href="#prestamo-externo">Préstamo Externo</a></li>
+                        <li><a href="#catalogo">Catálogo Electrónico</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Recursos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#catalogo">Material Bibliográfico</a></li>
+                        <li><a href="#dashboards">Estadísticas</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Información</h4>
+                    <ul class="footer-links">
+                        <li><a href="#mision">Misión</a></li>
+                        <li><a href="#vision">Visión</a></li>
+                        <li><a href="#valores">Valores</a></li>
+                        <li><a href="#horarios">Horarios</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Biblioteca Central - Departamento de Circulación y Préstamo</p>
+                <p class="footer-credits">Servicios bibliotecológicos desde 1965 📚 | Sistema de Gestión Integrado</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
 </body>
 </html>
